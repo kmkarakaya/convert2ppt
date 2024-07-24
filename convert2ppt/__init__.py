@@ -6,17 +6,24 @@ __version__ = "0.0.10"
 
 
 import os
+import sys
 import yaml
 
 def load_config():
-    config_path = os.path.join('convert2ppt', 'config.yaml')
+    if getattr(sys, 'frozen', False):
+        # running in a bundled app
+        config_path = os.path.join(sys._MEIPASS, 'config.yaml')
+    else:
+        # running normally
+        config_path = 'config.yaml'
+    
     with open(config_path, 'r') as file:
         print('Loading configuration file...')
         config = yaml.safe_load(file)
+    
     return config
 
 CONFIG = load_config()
 
 from .configure_llm import connect_gemini
-
 __all__ = ['CONFIG', 'connect_gemini']
