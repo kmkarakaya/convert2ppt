@@ -600,6 +600,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#convert2ppt.load_pdfs.load_pdfs" class="md-nav__link">
+    <span class="md-ellipsis">
+      load_pdfs()
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -651,6 +660,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#convert2ppt.load_pdfs.load_pdfs" class="md-nav__link">
+    <span class="md-ellipsis">
+      load_pdfs()
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -692,6 +710,99 @@
 
 
 
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h2 id="convert2ppt.load_pdfs.load_pdfs" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">load_pdfs</span><span class="p">(</span><span class="n">data_dir</span><span class="p">)</span></code>
+
+
+<a href="#convert2ppt.load_pdfs.load_pdfs" class="headerlink" title="Permanent link">&para;</a></h2>
+
+    <div class="doc doc-contents ">
+
+      <p>This function loads all PDF files from a specified directory, extracts the text content from each PDF file, 
+and offers the user the option to save the extracted text to a .txt file.</p>
+      <p>data_dir (str): The directory from which to load the PDF files.</p>
+<p>The function performs the following steps:
+1. Deletes any non-PDF files in the specified directory.
+2. Lists all PDF files in the directory.
+3. If no PDF files are found, the function prints a message and exits.
+4. If PDF files are found, the function prints a message indicating the number of PDF files found.
+5. The function then extracts the text content from each PDF file and appends it to a list of prompts.
+6. The function prints a message warning the user that the extracted text may sometimes be garbage and should be reviewed before saving.
+7. For each prompt, the function prints the first 100 characters of the extracted text and asks the user if they want to save the content to a .txt file.
+8. If the user responds with 'y', the function saves the content to a .txt file in the same directory as the original PDF file. The .txt file has the same name as the PDF file, but with a .txt extension instead of .pdf.
+9. If the user responds with anything other than 'y', the function skips the current document and moves on to the next one.</p>
+
+        <details class="quote">
+          <summary>Source code in <code>convert2ppt/load_pdfs.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">load_pdfs</span><span class="p">(</span><span class="n">data_dir</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This function loads all PDF files from a specified directory, extracts the text content from each PDF file, </span>
+<span class="sd">    and offers the user the option to save the extracted text to a .txt file.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    data_dir (str): The directory from which to load the PDF files.</span>
+
+<span class="sd">    The function performs the following steps:</span>
+<span class="sd">    1. Deletes any non-PDF files in the specified directory.</span>
+<span class="sd">    2. Lists all PDF files in the directory.</span>
+<span class="sd">    3. If no PDF files are found, the function prints a message and exits.</span>
+<span class="sd">    4. If PDF files are found, the function prints a message indicating the number of PDF files found.</span>
+<span class="sd">    5. The function then extracts the text content from each PDF file and appends it to a list of prompts.</span>
+<span class="sd">    6. The function prints a message warning the user that the extracted text may sometimes be garbage and should be reviewed before saving.</span>
+<span class="sd">    7. For each prompt, the function prints the first 100 characters of the extracted text and asks the user if they want to save the content to a .txt file.</span>
+<span class="sd">    8. If the user responds with &#39;y&#39;, the function saves the content to a .txt file in the same directory as the original PDF file. The .txt file has the same name as the PDF file, but with a .txt extension instead of .pdf.</span>
+<span class="sd">    9. If the user responds with anything other than &#39;y&#39;, the function skips the current document and moves on to the next one.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">delete_non_pdf_files</span><span class="p">(</span><span class="n">data_dir</span><span class="p">)</span>
+    <span class="c1"># open and convert all pdf files in the local directory into a list variable called docs </span>
+    <span class="n">docs</span> <span class="o">=</span> <span class="p">[</span><span class="n">doc</span> <span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span> <span class="n">data_dir</span><span class="p">)</span> <span class="k">if</span> <span class="n">doc</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.pdf&#39;</span><span class="p">)]</span>    
+
+    <span class="c1">#check if there is any pdf in the local folder</span>
+    <span class="c1">#if there is no pdf file in the local folder, print &#39;No PDF files found in the local directory&#39; and exit the function</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">docs</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;No PDF files found in the </span><span class="si">{data_dir}</span><span class="s1"> directory!&#39;</span><span class="p">)</span>
+        <span class="n">exit</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">docs</span><span class="p">)</span><span class="si">}</span><span class="s2"> PDF files in the </span><span class="si">{</span><span class="n">data_dir</span><span class="si">}</span><span class="s2"> directory.&quot;</span><span class="p">)</span>
+
+
+    <span class="c1"># generate a list of prompts from the pdf content</span>
+
+    <span class="n">prompts</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">docs</span><span class="p">:</span>
+        <span class="n">pdf_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">doc</span><span class="p">)</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="n">extract_text_from_pdf</span><span class="p">(</span><span class="n">pdf_path</span><span class="p">)</span>
+        <span class="n">prompts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">IMPORTANT:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Extracted text from PDF files, sometimes, could be garbage.&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Please review the extracted text before saving it to a .txt file.&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Note that we can not create a PowerPoint presentation from garbage text.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">prompts</span><span class="p">)):</span>
+        <span class="c1">#show the first 100 characters of the extracted text</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Extracted text from &#39;</span><span class="si">{</span><span class="n">docs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39; starts with:</span><span class="se">\n</span><span class="s2"> &#39;</span><span class="si">{</span><span class="n">prompts</span><span class="p">[</span><span class="n">i</span><span class="p">][:</span><span class="mi">100</span><span class="p">]</span><span class="si">}</span><span class="s2">...&#39;&quot;</span><span class="p">)</span>
+        <span class="c1">#ask the user if they want to save the extracted text to a .txt file</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Do you want to save the content to a .txt file? (y/n): &quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">!=</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Skipping this document.&#39;</span><span class="p">)</span>
+            <span class="k">continue</span>
+        <span class="n">filename</span> <span class="o">=</span> <span class="n">docs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;.pdf&#39;</span><span class="p">,</span><span class="s1">&#39;.txt&#39;</span><span class="p">)</span>
+        <span class="n">full_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">full_path</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+            <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">prompts</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Saved content to &#39;</span><span class="si">{</span><span class="n">full_path</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
 
 
 
