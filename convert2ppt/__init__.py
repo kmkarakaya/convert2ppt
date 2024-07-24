@@ -5,11 +5,13 @@ __email__ = "kmkarakaya@gmail.com"
 __version__ = "0.0.8"
 
 
+import os
 import yaml
 
-
 def load_config():
-    with open('convert2ppt\config.yaml', 'r') as file:
+    config_path = os.path.join('convert2ppt', 'config.yaml')
+    with open(config_path, 'r') as file:
+        print('Loading configuration file...')
         config = yaml.safe_load(file)
     return config
 
