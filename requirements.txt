@@ -3,4 +3,4 @@ python-pptx
 matplotlib
 google-generativeai
 PyMuPDF
-yaml
+PyYAML
