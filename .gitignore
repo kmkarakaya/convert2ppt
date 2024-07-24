@@ -11,7 +11,7 @@ private/
 .Python
 env/
 build/
-data/
+convert2ppt/data/
 develop-eggs/
 dist/
 downloads/
