@@ -1,5 +1,14 @@
 # Installation
 
+## Standalone release
+
+To install convert2ppt as a standalone application (exe), go to dist folder on GitHub:
+
+```
+pip install git+https://github.com/kmkarakaya/convert2ppt
+```
+
+
 ## Stable release
 
 To install convert2ppt, run this command in your terminal:
