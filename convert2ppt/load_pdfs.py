@@ -25,7 +25,26 @@ def extract_text_from_pdf(pdf_path):
             text += page_text
     return text
 
+
 def load_pdfs(data_dir):
+    """
+    This function loads all PDF files from a specified directory, extracts the text content from each PDF file, 
+    and offers the user the option to save the extracted text to a .txt file.
+
+    Parameters:
+    data_dir (str): The directory from which to load the PDF files.
+
+    The function performs the following steps:
+    1. Deletes any non-PDF files in the specified directory.
+    2. Lists all PDF files in the directory.
+    3. If no PDF files are found, the function prints a message and exits.
+    4. If PDF files are found, the function prints a message indicating the number of PDF files found.
+    5. The function then extracts the text content from each PDF file and appends it to a list of prompts.
+    6. The function prints a message warning the user that the extracted text may sometimes be garbage and should be reviewed before saving.
+    7. For each prompt, the function prints the first 100 characters of the extracted text and asks the user if they want to save the content to a .txt file.
+    8. If the user responds with 'y', the function saves the content to a .txt file in the same directory as the original PDF file. The .txt file has the same name as the PDF file, but with a .txt extension instead of .pdf.
+    9. If the user responds with anything other than 'y', the function skips the current document and moves on to the next one.
+    """
 
     delete_non_pdf_files(data_dir)
     # open and convert all pdf files in the local directory into a list variable called docs 
