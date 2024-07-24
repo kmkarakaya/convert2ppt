@@ -84,3 +84,4 @@ nav:
     - API Reference:
           - convert2ppt module: convert2ppt.md
           - common module: common.md
+          - load_pdfs module: load_pdfs.md
