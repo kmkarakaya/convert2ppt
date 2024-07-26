@@ -150,7 +150,6 @@ def create_presentations(data_dir):
             with open(os.path.join(data_dir, file_name), 'r', encoding='utf-8') as file:
                 print(f"\tLoading Json file: {file_name}")
                 json_data = json.load(file)
-                print(f"\tfirst 2 lines of the JSON data: {json_data['slides'][:2]}")
                 prepare_presentation(json_data, file_name,data_dir)
                 print(f"\tThe PPT file for {file_name} created successfully: ")
     print("All presentations files created successfully.")
