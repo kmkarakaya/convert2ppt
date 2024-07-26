@@ -15,7 +15,8 @@ def load_config():
         config_path = os.path.join(sys._MEIPASS, 'config.yaml')
     else:
         # running normally
-        config_path = 'config.yaml'
+        dir_path = os.path.dirname(os.path.realpath(__file__))
+        config_path = os.path.join(dir_path, 'config.yaml')
     
     with open(config_path, 'r') as file:
         print('Loading configuration file...')
