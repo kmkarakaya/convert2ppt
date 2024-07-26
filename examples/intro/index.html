@@ -1069,9 +1069,45 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </div>
 </clipboard-copy>
 </div>
-<div class="highlight-ipynb hl-python"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">'Hello World!'</span><span class="p">)</span>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="kn">import</span> <span class="nn">convert2ppt</span>
+<span class="kn">from</span> <span class="nn">convert2ppt.generate_json</span> <span class="kn">import</span> <span class="n">generate_json</span>
+<span class="kn">from</span> <span class="nn">convert2ppt.load_pdfs</span> <span class="kn">import</span> <span class="n">load_pdfs</span>
+<span class="kn">from</span> <span class="nn">convert2ppt.generate_ppt</span> <span class="kn">import</span> <span class="n">create_presentations</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Welcome to convert2ppt!"</span><span class="p">)</span>
+    <span class="c1"># Generate text content from PDFs</span>
+    <span class="n">data_dir</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">".\data"</span>
+    <span class="n">load_pdfs</span><span class="p">(</span><span class="n">data_dir</span><span class="p">)</span>
+
+    <span class="c1"># Generate JSON content from text content</span>
+    <span class="n">generate_json</span><span class="p">(</span><span class="n">data_dir</span><span class="p">)</span>
+
+    <span class="c1"># Generate PowerPoint presentations from JSON content</span>
+    <span class="n">create_presentations</span><span class="p">(</span><span class="n">data_dir</span><span class="p">)</span>
 </pre></div>
-<div class="clipboard-copy-txt" id="cell-1">print('Hello World!')</div>
+<div class="clipboard-copy-txt" id="cell-1">import convert2ppt
+from convert2ppt.generate_json import generate_json
+from convert2ppt.load_pdfs import load_pdfs
+from convert2ppt.generate_ppt import create_presentations
+import sys
+
+
+def main():
+
+    print("Welcome to convert2ppt!")
+    # Generate text content from PDFs
+    data_dir = r".\data"
+    load_pdfs(data_dir)
+
+    # Generate JSON content from text content
+    generate_json(data_dir)
+
+    # Generate PowerPoint presentations from JSON content
+    create_presentations(data_dir)</div>
 </div>
 </div>
 </div>
@@ -1083,7 +1119,9 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>Hello World!
+<pre>Running normally...
+config_path: /opt/hostedtoolcache/Python/3.11.9/x64/lib/python3.11/site-packages/convert2ppt/config.yaml
+Loading configuration file...
 </pre>
 </div>
 </div>
@@ -1120,7 +1158,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1-2.1-2M12.5 7v5.2l4 2.4-1 1L11 13V7h1.5M11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2v1.8Z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2024-07-24T13:16:19+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-07-24</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2024-07-26T15:28:08+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-07-26</span>
   </span>
 
     
