@@ -6,9 +6,7 @@ from pptx.dml.color import RGBColor
 from matplotlib import colors as mcolors
 import os
 
-# Create a Presentation instance
-prs = Presentation()
-filename = "my_presentation.pptx"  # Use a different filename to avoid permission issues
+
 
 # List of valid named colors from matplotlib
 valid_colors = list(mcolors.CSS4_COLORS.keys())
@@ -108,7 +106,10 @@ def layout_content(slide, body, start_top):
 
 # Add slides based on JSON data
 def prepare_presentation(json_data, filename, data_dir):
-    print(f"\tCreating slides")
+
+    # Create a Presentation instance
+    prs = Presentation()
+    print(f"\tCreating slides for '{filename}'")
     for slide_data in json_data['slides']:
         slide = prs.slides.add_slide(prs.slide_layouts[6])  # Blank slide layout
 
@@ -145,14 +146,12 @@ def create_presentations(data_dir):
     # Read a JSON object from the local directory every .json file
     print("Starting building PPT file(s).")
     for file_name in os.listdir(data_dir):
-        
         if file_name.endswith('.json'):
             with open(os.path.join(data_dir, file_name), 'r', encoding='utf-8') as file:
-                
-                print(f"\tLoading Json file for {file_name.replace('.json', '')}")
+                print(f"\tLoading Json file: {file_name}")
                 json_data = json.load(file)
-                
+                print(f"\tfirst 2 lines of the JSON data: {json_data['slides'][:2]}")
                 prepare_presentation(json_data, file_name,data_dir)
-                print(f"\tThe PPT file for {file_name.replace('.json', '')} created successfully: ")
+                print(f"\tThe PPT file for {file_name} created successfully: ")
     print("All presentations files created successfully.")
     

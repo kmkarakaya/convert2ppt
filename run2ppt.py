@@ -31,6 +31,8 @@ def main():
     # Create PowerPoint presentations
     create_presentations(data_dir)
 
+    input("Press Enter to exit...")
+
 if __name__ == '__main__':
         
     main()

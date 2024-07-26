@@ -72,10 +72,10 @@ def load_pdfs(data_dir):
     print(f"Please review the extracted text before saving it to a .txt file.")
     print("Note that we can not create a PowerPoint presentation from garbage text.\n")
     for i in range(len(prompts)):
-        #show the first 100 characters of the extracted text
-        print(f"Extracted text from '{docs[i]}' starts with:\n '{prompts[i][:100]}...'")
+        #show the first 100 characters of the extracted text without extra white spaces
+        print(f"Extracted text from '{docs[i]}' starts with:\n\n '{' '.join(prompts[i][:100].split())}...'")
         #ask the user if they want to save the extracted text to a .txt file
-        response = input(f"\nDo you want to save the content to a .txt file? (y/n): ")
+        response = input(f"\nCan we continue with the extracted content? (y/n): ")
         if response.lower() != 'y':
             print('Skipping this document.')
             continue
