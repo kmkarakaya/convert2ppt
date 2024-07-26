@@ -58,65 +58,6 @@ text_color_rgb = get_text_color(background_color_tuple)
 
 
 
-
-'''
-# Load JSON data (using the given JSON for now)
-json_data = {
-    "slides": [
-        {
-            "slide_number": 1,
-            "title": "Introduction to LLMs",
-            "subtitle": "",
-            "body": [
-                { "type": "Heading", "content": "Overview" },
-                { "type": "Bullet Point", "content": "Introduction to large language models (LLMs)" },
-                { "type": "Bullet Point", "content": "Generative capabilities and common-sense reasoning" },
-                { "type": "Heading", "content": "Purpose of This Chapter" },
-                { "type": "Bullet Point", "content": "Exploring how LLMs revolutionize software development" },
-                { "type": "Bullet Point", "content": "Understanding AI-powered applications and orchestrator frameworks" }
-            ]
-        },
-        {
-            "slide_number": 2,
-            "title": "How LLMs are Changing Software Development",
-            "subtitle": "",
-            "body": [
-                { "type": "Heading", "content": "Capabilities of LLMs" },
-                { "type": "Bullet Point", "content": "Natural language understanding tasks" },
-                { "type": "Bullet Point", "content": "Text generation and common-sense reasoning" },
-                { "type": "Bullet Point", "content": "Brainstorming skills" },
-                { "type": "Heading", "content": "Integration into Applications" },
-                { "type": "Bullet Point", "content": "API calls to hosted LLMs" },
-                { "type": "Bullet Point", "content": "Customization for specific needs" },
-                { "type": "Bullet Point", "content": "Efficiency and ease of AI incorporation" }
-            ]
-        },
-        {
-            "slide_number": 3,
-            "title": "Aspects of Incorporating LLMs",
-            "subtitle": "",
-            "body": [
-                { "type": "Heading", "content": "Technical Aspect" },
-                { "type": "Bullet Point", "content": "Embedding LLMs via REST API calls" },
-                { "type": "Bullet Point", "content": "Managing with AI orchestrators" },
-                { "type": "Heading", "content": "Conceptual Aspect" },
-                { "type": "Bullet Point", "content": "New capabilities in applications" },
-                { "type": "Bullet Point", "content": "LLMs as a new category of software – copilot" }
-            ]
-        },
-        {
-            "slide_number": 4,
-            "title": "Next Steps",
-            "subtitle": "",
-            "body": [
-                { "type": "Heading", "content": "Upcoming Content" },
-                { "type": "Bullet Point", "content": "Detailed exploration of technical aspects" },
-                { "type": "Bullet Point", "content": "Introduction to the copilot system" }
-            ]
-        }
-    ]
-}
-'''
 # Utility function to add text boxes
 def add_textbox(slide, text, left, top, width, height, font_size=Pt(24), bold=False, align=PP_ALIGN.LEFT, color=RGBColor(0, 0, 0)):
     textbox = slide.shapes.add_textbox(left, top, width, height)
@@ -167,6 +108,7 @@ def layout_content(slide, body, start_top):
 
 # Add slides based on JSON data
 def prepare_presentation(json_data, filename, data_dir):
+    print(f"\tCreating slides")
     for slide_data in json_data['slides']:
         slide = prs.slides.add_slide(prs.slide_layouts[6])  # Blank slide layout
 
@@ -195,16 +137,22 @@ def prepare_presentation(json_data, filename, data_dir):
     # Save presentation
     filename = filename.replace('.json', '.pptx')
     full_path = os.path.join(data_dir, filename)
-    print(f"Saving presentation to '{filename.replace('.json', '.pptx')}'...")
+    print(f"\tSaving presentation to '{full_path}'")
     prs.save(full_path)
 
 
 def create_presentations(data_dir):
     # Read a JSON object from the local directory every .json file
+    print("Starting building PPT file(s).")
     for file_name in os.listdir(data_dir):
+        
         if file_name.endswith('.json'):
             with open(os.path.join(data_dir, file_name), 'r', encoding='utf-8') as file:
-                print(f"Processing {file_name}...")
+                
+                print(f"\tLoading Json file for {file_name.replace('.json', '')}")
                 json_data = json.load(file)
-                # Process the JSON data here
+                
                 prepare_presentation(json_data, file_name,data_dir)
+                print(f"\tThe PPT file for {file_name.replace('.json', '')} created successfully: ")
+    print("All presentations files created successfully.")
+    

@@ -30,16 +30,19 @@ def generate_json(data_dir):
             text = file.read()
             prompts.append(text)
 
-
+    print(f"\nContent generations started for {len(docs)} documents.")  
+    print(f"Please wait while the model generates the content...")
 
     for i, prompt in enumerate(prompts):
-        print(f"Attempting to generate presentation content in a JSON format for: {docs[i]}")  # Log the document being processed
+       
+        print(f"\tAttempting to generate content in a JSON format for: {docs[i].replace('.txt', '')}")  
         json_data = attempt_generating_json(model, prompt)
         if json_data is None:
-            print(f"Failed to generate JSON for {docs[i]}. Skipping this document.")
+            print(f"\tFailed to generate a valid JSON for {docs[i]}. Skipping this document.")
             continue
         filename = docs[i].replace('.txt', '.json')
         full_path = os.path.join(data_dir, filename)
         with open(full_path, 'w') as file:
             json.dump(json_data, file)
-        print(f"JSON for {docs[i]} saved to {filename}")
+        print(f"\tSuccessfully generated a valid JSON & saved to {filename}")
+    print("All content generations completed successfully.")
