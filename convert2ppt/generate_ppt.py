@@ -13,6 +13,8 @@ valid_colors = list(mcolors.CSS4_COLORS.keys())
 
 # Function to get valid background color from user
 def get_user_background_color():
+    if os.getenv('CI'):  # or any other condition to check if running in CI
+        return "lightblue"  # default value when in CI
     while True:
         user_specified_color = input("Enter your preferred background color (e.g., 'red', 'lightblue', or HEX '#ADD8E6'): ")
         try:
