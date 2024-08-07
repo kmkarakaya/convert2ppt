@@ -17,11 +17,13 @@ def delete_non_pdf_files(data_dir):
 
 
 def extract_text_from_pdf(pdf_path):
+    print(f"----------------Extracting text from '{pdf_path}'...")
     doc = fitz.open(pdf_path)
     text = ""
     for page in doc:
         page_text = page.get_text("text")
         if page_text:
+            print('page_text:', page_text)
             text += page_text
     return text
 

@@ -6,6 +6,9 @@ from convert2ppt import connect_gemini
 def attempt_generating_json(model, prompt):
     for attempt in range(3):
         try:
+            if not prompt:
+                print("Warning: Empty prompt. Skipping content generation.")
+                return None
             response = model.generate_content(prompt)
             json_data = json.loads(response.text)
             # If the JSON data is loaded successfully, break the loop
